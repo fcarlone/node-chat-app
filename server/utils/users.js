@@ -52,7 +52,21 @@ class Users {
     })
     return namesArray;
   }
-};
+  // get room list
+  getRoomList (room) {
+    // var users = this.users.filter((user) => {
+    //   return user.room === room;
+    // })
+    var roomsArray = [];
+    this.users.forEach((user) => {
+      // return user.room
+      if (!roomsArray.includes(user.room)) {
+        roomsArray.push(user.room);
+      }
+    })
+    return roomsArray;
+  }
+ };
 
 module.exports = {Users};
 

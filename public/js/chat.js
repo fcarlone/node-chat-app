@@ -40,6 +40,18 @@ socket.on('updateUserList', function (users) {
   });
 
   jQuery('#users').html(ol);
+
+  // list active rooms
+  socket.on('updateRoomList', function(rooms) {
+    var ol = jQuery('<ol></ol>');
+
+    rooms.forEach(function (room) {
+      ol.append(jQuery('<li></li>').text(room));
+    });
+
+    jQuery('#rooms').html(ol);
+  })
+
 })
 
 socket.on('newMessage', function(message) {

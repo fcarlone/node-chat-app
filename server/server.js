@@ -34,6 +34,8 @@ io.on('connection', (socket) => {
     users.addUser(socket.id, params.name, params.room);
 
     io.to(params.room).emit('updateUserList', users.getUserList(params.room));
+    // active rooms to all users
+    io.emit('updateRoomList', users.getRoomList(params.room));
 
     // socket.emit - message to a user who joined from Admin
     socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));;
@@ -70,6 +72,8 @@ io.on('connection', (socket) => {
 
     if (user) {
       io.to(user.room).emit('updateUserList', users.getUserList(user.room));
+      
+      io.emit('updateRoomList', users.getRoomList(user.room));
       io.to(user.room).emit('newMessage', generateMessage('Admin', `${user.name} has left`));
     }
   });
