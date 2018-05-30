@@ -11,7 +11,7 @@
 
 ### Google Geolocation API was used for getting user's location.
 
-### Testing for the app was done with the help:
+### Testing for the app was done with:
 * mocha - testing framework
 * expect.js - written assertions
 
