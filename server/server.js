@@ -27,19 +27,13 @@ io.on('connection', (socket) => {
     }
 
     socket.join(params.room);
-    // io.emit -> io.to('The Office Fans').emit
-    // socket.broadcast.emit -> socket.broadcast.to('The Office Fans').emit
-    // socket.emit
     users.removeUser(socket.id);
     users.addUser(socket.id, params.name, params.room);
 
     io.to(params.room).emit('updateUserList', users.getUserList(params.room));
-    // active rooms to all users
     io.emit('updateRoomList', users.getRoomList(params.room));
 
-    // socket.emit - message to a user who joined from Admin
     socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));;
-    // socket.broadcast.emit - send to all users expect the one who joined - from Admin
     socket.broadcast.to(params.room).emit('newMessage', generateMessage('Admin', `${params.name} has joined`));
     callback();
   });
@@ -50,13 +44,7 @@ io.on('connection', (socket) => {
     if (user && isRealString(message.text)) {
       io.to(user.room).emit('newMessage', generateMessage(user.name, message.text));
     }
-
     callback();
-    // socket.broadcast.emit('newMessage', {
-    //   from: message.from,
-    //   text: message.text,
-    //   createdAt: new Date().getTime()
-    // });
   });
 
   socket.on('createLocationMessage', (coords) => {
@@ -72,7 +60,7 @@ io.on('connection', (socket) => {
 
     if (user) {
       io.to(user.room).emit('updateUserList', users.getUserList(user.room));
-      
+
       io.emit('updateRoomList', users.getRoomList(user.room));
       io.to(user.room).emit('newMessage', generateMessage('Admin', `${user.name} has left`));
     }
