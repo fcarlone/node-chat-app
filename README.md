@@ -1,13 +1,17 @@
 # Node Chat App
 
-### Real-time Chat App running on the running on Node.js.
+### Real-time Chat App allowing users to create their own chat rooms to discuss specific topics with the option to show their current location.
 
-### Chat App uses the following packages: 
+### The application is built on the Node.js platform.  Several popular npm packages was used to create the Chat App. 
+
+### Chat App uses the following npm packages: 
 * Express - web application framework
 * socket.io - real-time bidirectional event-based communication
-* moment - 
+* Moment.js - display date and time
 
-### Testing for the app was done with the help :
+### Google Geolocation API for getting user's location.
+
+### Testing for the app was done with the help:
 * mocha - testing framework
 * expect.js - written assertions
 
